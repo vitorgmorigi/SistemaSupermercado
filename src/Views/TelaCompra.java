@@ -12,9 +12,10 @@ import Models.Produto;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JLabel;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.table.DefaultTableModel;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 /**
  *
@@ -31,6 +32,7 @@ public class TelaCompra extends javax.swing.JFrame {
     
     public TelaCompra() {
         initComponents();
+        setLocationRelativeTo(null);
         txtQtd.setText("1");
         separador = new DecimalFormatSymbols();
         separador.setDecimalSeparator('.');
@@ -104,6 +106,11 @@ public class TelaCompra extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 204, 51));
         jButton4.setText("Finalizar Compra");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         btnCancelarCompra.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCancelarCompra.setForeground(new java.awt.Color(255, 0, 0));
@@ -232,16 +239,24 @@ public class TelaCompra extends javax.swing.JFrame {
 
     private void btnColocarNoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColocarNoCarrinhoActionPerformed
         
-        ControladorCompra.getInstance().adicionaProdutoNoCarrinho(Integer.parseInt(txtCodProduto.getText()), Integer.parseInt(txtQtd.getText()));
+       if(ControladorCompra.getInstance().verificaSeOProdutoEstaNoCarrinho(Integer.parseInt(txtCodProduto.getText())) == false){
+            ControladorCompra.getInstance().adicionaProdutoNoCarrinho(Integer.parseInt(txtCodProduto.getText()), Integer.parseInt(txtQtd.getText()));
+
+            this.tabelaCarrinho = (DefaultTableModel) carrinho.getModel();
+            Object dados[] = {ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getCodigo(),
+                              ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getNome(),
+                              Integer.parseInt(txtQtd.getText()),
+                              df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()*Integer.parseInt(txtQtd.getText()))};
+            this.tabelaCarrinho.addRow(dados);
+            txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
+            ControladorCompra.getInstance().getCompra().exibeCarrinho();           
+       } 
+       
+       else{
+           JOptionPane.showMessageDialog(rootPane, "O produto já está no carrinho. Caso queira adicionar mais, remova-o e altere a quantidade!");
+       }
         
-        this.tabelaCarrinho = (DefaultTableModel) carrinho.getModel();
-        Object dados[] = {ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getCodigo(),
-                          ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getNome(),
-                          Integer.parseInt(txtQtd.getText()),
-                          df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()*Integer.parseInt(txtQtd.getText()))};
-        this.tabelaCarrinho.addRow(dados);
-        txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
-        ControladorCompra.getInstance().getCompra().exibeCarrinho();
+
 
         
     }//GEN-LAST:event_btnColocarNoCarrinhoActionPerformed
@@ -272,29 +287,66 @@ public class TelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPrecoTotalActionPerformed
 
     private void btnCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCompraActionPerformed
-        ControladorCompra.getInstance().cancelarCompra();
-        ControladorPrincipal.getInstance().setTela(0);
-        dispose();
+        
+        if (verificadorSenha().equals("0147")){
+            ControladorCompra.getInstance().cancelarCompra();
+            ControladorPrincipal.getInstance().setTela(0);
+            dispose();            
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Senha incorreta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnCancelarCompraActionPerformed
 
     private void btnRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverProdutoActionPerformed
         
         if(carrinho.getSelectedRow() != -1) // executa somente se tiver alguma linha selecionada
         {
+            if (verificadorSenha().equals("0147")) {
+                String produtoRemovido = carrinho.getModel().getValueAt(carrinho.getSelectedRow(), 0).toString();
+                String precoRemovido = carrinho.getModel().getValueAt(carrinho.getSelectedRow(), 3).toString();
 
-            String produtoRemovido = carrinho.getModel().getValueAt(carrinho.getSelectedRow(), 0).toString();
-            String precoRemovido = carrinho.getModel().getValueAt(carrinho.getSelectedRow(), 3).toString();
+                ControladorCompra.getInstance().removeProdutoDoCarrinho(Integer.parseInt(produtoRemovido), Double.parseDouble(precoRemovido));
 
-            ControladorCompra.getInstance().removeProdutoDoCarrinho(Integer.parseInt(produtoRemovido), Double.parseDouble(precoRemovido));
-
-            this.tabelaCarrinho.removeRow(carrinho.getSelectedRow());
-            txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal())); 
-            ControladorCompra.getInstance().getCompra().exibeCarrinho();
+                this.tabelaCarrinho.removeRow(carrinho.getSelectedRow());
+                txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
+                ControladorCompra.getInstance().getCompra().exibeCarrinho();
+            }
+            
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "Senha incorreta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+            }
+     
         }
         
 
     }//GEN-LAST:event_btnRemoverProdutoActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private String verificadorSenha()
+    {
+            // Cria campo onde o usuario entra com a senha   
+            JPasswordField password = new JPasswordField(10);   
+            password.setEchoChar('*');   
+            // Cria um rótulo para o campo   
+            JLabel rotulo = new JLabel("Digite a senha do funcionário:");   
+            // Coloca o rótulo e a caixa de entrada numa JPanel:   
+            JPanel entUsuario = new JPanel();   
+            entUsuario.add(rotulo);   
+            entUsuario.add(password);   
+            // Mostra o rótulo e a caixa de entrada de password para o usuario fornecer a senha:   
+            JOptionPane.showMessageDialog(null, entUsuario, "Acesso restrito", JOptionPane.PLAIN_MESSAGE);   
+            // O programa só prossegue quando o usuário clicar o botao de OK do showMessageDialog.   
+            // Aí, é só pegar a senha:   
+            // Captura a senha:   
+            return password.getText();         
+    }
     
     /**
      * @param args the command line arguments

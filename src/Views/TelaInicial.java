@@ -19,6 +19,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

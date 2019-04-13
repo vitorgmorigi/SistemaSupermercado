@@ -48,6 +48,11 @@ public class ControladorCompra {
         compra.setPrecoTotal(getCompra().getPrecoTotal() - precoExibidoNaTabela);
     }
     
+    public boolean verificaSeOProdutoEstaNoCarrinho(int codigo)
+    {
+        return compra.getCarrinho().get(codigo) != null;
+    }
+    
 
     
     
