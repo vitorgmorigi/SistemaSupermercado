@@ -67,7 +67,7 @@ public class TelaGerenciadorCompras extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nº de vendas:");
+        jLabel2.setText("Nº de compras:");
 
         jLabel3.setText("Total arrecadado (R$):");
 

@@ -258,11 +258,11 @@ public class TelaCompra extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Quantidade", "Preço"
+                "Código", "Nome", "Quantidade", "Preço unitário", "Preço final"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -421,6 +421,7 @@ public class TelaCompra extends javax.swing.JFrame {
             Object dados[] = {ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getCodigo(),
                               ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getNome(),
                               Integer.parseInt(txtQtd.getText()),
+                              df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()),
                               df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()*Integer.parseInt(txtQtd.getText()))};
             this.tabelaCarrinho.addRow(dados);
             txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
@@ -529,9 +530,12 @@ public class TelaCompra extends javax.swing.JFrame {
                             case 2:
                                 txtCupom.setText(txtCupom.getText() + "Quantidade: " + carrinho.getValueAt(i, j) + "\n");
                                 break;
-                            default:
-                                txtCupom.setText(txtCupom.getText() + "Preço: " + carrinho.getValueAt(i, j) + "\n");
+                            case 3:
+                                txtCupom.setText(txtCupom.getText() + "Preço unitário: " + carrinho.getValueAt(i, j) + "\n");
                                 break;
+                            default:
+                                txtCupom.setText(txtCupom.getText() + "Preço final: " + carrinho.getValueAt(i, j) + "\n");
+                                break;                                
                         }
 
                     }
