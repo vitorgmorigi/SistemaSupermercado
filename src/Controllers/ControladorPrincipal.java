@@ -6,6 +6,7 @@
 package Controllers;
 
 import Views.TelaCompra;
+import Views.TelaGerenciadorCompras;
 import Views.TelaInicial;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -45,6 +46,10 @@ public class ControladorPrincipal {
                 
             case 1:
                 new TelaCompra().setVisible(true);
+                break;
+            
+            case 2:
+                new TelaGerenciadorCompras().setVisible(true);
                 break;
             
         }

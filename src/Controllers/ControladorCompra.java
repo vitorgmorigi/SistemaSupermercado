@@ -99,5 +99,27 @@ public class ControladorCompra {
         return listaCompras;
     }
     
+    public String percorreListaCompras()
+    {
+        String saida = "";
+        int i = 1;
+        for(Compra c : listaCompras)
+        {
+            saida += ("Compra " + Integer.toString(i) + " - " + "Valor venda: R$" + c.getPrecoTotal() + "\n");
+            i++;
+        }
+        return saida;
+    }
+    
+    public double calculaTotalArrecadado()
+    {
+        double total = 0;
+        for(Compra c : listaCompras)
+        {
+            total += c.getPrecoTotal();
+        }
+        
+        return total;
+    }
     
 }

@@ -34,7 +34,10 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnIniciaCompra" min="-2" pref="198" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnGerenciadorCompras" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Component id="btnIniciaCompra" min="-2" pref="198" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -46,7 +49,9 @@
               <Component id="jLabel1" min="-2" pref="34" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
               <Component id="btnIniciaCompra" min="-2" pref="55" max="-2" attributes="0"/>
-              <EmptySpace pref="169" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="btnGerenciadorCompras" min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace pref="84" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,6 +72,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Servi&#xe7;o de AutoAtendimento"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnGerenciadorCompras">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gerenciador de compras"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerenciadorComprasActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

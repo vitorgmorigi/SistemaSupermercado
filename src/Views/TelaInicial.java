@@ -33,6 +33,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         btnIniciaCompra = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnGerenciadorCompras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -48,6 +49,13 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Serviço de AutoAtendimento");
 
+        btnGerenciadorCompras.setText("Gerenciador de compras");
+        btnGerenciadorCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerenciadorComprasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,7 +66,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap(272, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnIniciaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGerenciadorCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIniciaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(298, 298, 298))
         );
         layout.setVerticalGroup(
@@ -68,7 +78,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(163, 163, 163)
                 .addComponent(btnIniciaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnGerenciadorCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,6 +91,11 @@ public class TelaInicial extends javax.swing.JFrame {
         ControladorPrincipal.getInstance().setTela(1);
         dispose();
     }//GEN-LAST:event_btnIniciaCompraActionPerformed
+
+    private void btnGerenciadorComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciadorComprasActionPerformed
+        ControladorPrincipal.getInstance().setTela(2);
+        dispose();
+    }//GEN-LAST:event_btnGerenciadorComprasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,6 +133,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGerenciadorCompras;
     private javax.swing.JButton btnIniciaCompra;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

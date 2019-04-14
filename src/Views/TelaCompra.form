@@ -94,21 +94,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Visa - D&#xe9;bito"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisaDebitoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="btnVisaCredito">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Visa - Cr&#xe9;dito"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisaCreditoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="btnMasterCredito">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mastercard - Cr&#xe9;dito"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMasterCreditoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="btnMasterDebito">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mastercard - D&#xe9;bito"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMasterDebitoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -195,6 +207,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="txtCupom">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
@@ -297,7 +310,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jScrollPane1" pref="613" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="604" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtPrecoTotal" alignment="0" max="32767" attributes="0"/>
@@ -339,7 +352,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pre&#xe7;o total:"/>
+            <Property name="text" type="java.lang.String" value="Pre&#xe7;o total (R$):"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

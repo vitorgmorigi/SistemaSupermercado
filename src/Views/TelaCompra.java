@@ -26,6 +26,7 @@ public class TelaCompra extends javax.swing.JFrame {
     private final DecimalFormat df;
     private final DecimalFormatSymbols separador;
     private ButtonGroup formasPagamento;
+    private String formaPagamento;
     
     public TelaCompra() {
         initComponents();
@@ -43,6 +44,7 @@ public class TelaCompra extends javax.swing.JFrame {
         formasPagamento.add(btnVisaDebito);
         formasPagamento.add(btnMasterCredito);
         formasPagamento.add(btnMasterDebito);
+        carrinho.setEnabled(false);
     }
 
     /**
@@ -87,12 +89,32 @@ public class TelaCompra extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnVisaDebito.setText("Visa - Débito");
+        btnVisaDebito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaDebitoActionPerformed(evt);
+            }
+        });
 
         btnVisaCredito.setText("Visa - Crédito");
+        btnVisaCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaCreditoActionPerformed(evt);
+            }
+        });
 
         btnMasterCredito.setText("Mastercard - Crédito");
+        btnMasterCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasterCreditoActionPerformed(evt);
+            }
+        });
 
         btnMasterDebito.setText("Mastercard - Débito");
+        btnMasterDebito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasterDebitoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,6 +197,7 @@ public class TelaCompra extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Cupom fiscal:");
 
+        txtCupom.setEditable(false);
         txtCupom.setColumns(20);
         txtCupom.setRows(5);
         jScrollPane2.setViewportView(txtCupom);
@@ -228,7 +251,7 @@ public class TelaCompra extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrinho", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Preço total:");
+        jLabel1.setText("Preço total (R$):");
 
         carrinho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,7 +310,7 @@ public class TelaCompra extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPrecoTotal)
@@ -482,9 +505,7 @@ public class TelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEfetuaPagamentoActionPerformed
 
     private void btnConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagamentoActionPerformed
-        
-        
-      
+
         if(btnVisaCredito.isSelected() || btnVisaDebito.isSelected() || btnMasterCredito.isSelected() || btnMasterDebito.isSelected())
         {
             JOptionPane.showMessageDialog(this, "Insira o cartão");
@@ -501,19 +522,24 @@ public class TelaCompra extends javax.swing.JFrame {
                 txtCupom.setText("PRODUTOS COMPRADOS: \n\n");
                 for(int i = 0; i < carrinho.getRowCount(); i++){
                     for(int j = 1; j < carrinho.getColumnCount(); j++){
-                        if(j == 1)
-                            txtCupom.setText(txtCupom.getText() + "Produto: " + carrinho.getValueAt(i, j) + "\n");
-                        else if (j == 2)
-                            txtCupom.setText(txtCupom.getText() + "Quantidade: " + carrinho.getValueAt(i, j) + "\n");
-                        else
-                            txtCupom.setText(txtCupom.getText() + "Preço: " + carrinho.getValueAt(i, j) + "\n");
+                        switch (j) {
+                            case 1:
+                                txtCupom.setText(txtCupom.getText() + "Produto: " + carrinho.getValueAt(i, j) + "\n");
+                                break;
+                            case 2:
+                                txtCupom.setText(txtCupom.getText() + "Quantidade: " + carrinho.getValueAt(i, j) + "\n");
+                                break;
+                            default:
+                                txtCupom.setText(txtCupom.getText() + "Preço: " + carrinho.getValueAt(i, j) + "\n");
+                                break;
+                        }
 
                     }
                     txtCupom.setText(txtCupom.getText() + "\n\n");
 
                 }
 
-                txtCupom.setText(txtCupom.getText() + "PREÇO TOTAL: " + ControladorCompra.getInstance().getCompra().getPrecoTotal() + "\n" + "Forma de pagamento: ");
+                txtCupom.setText(txtCupom.getText() + "PREÇO TOTAL: " + ControladorCompra.getInstance().getCompra().getPrecoTotal() + "\n" + "Forma de pagamento: " + formaPagamento);
 
 
             }
@@ -539,6 +565,22 @@ public class TelaCompra extends javax.swing.JFrame {
         cupomFiscal.dispose();
         dispose();
     }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void btnVisaDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaDebitoActionPerformed
+        formaPagamento = btnVisaDebito.getText();
+    }//GEN-LAST:event_btnVisaDebitoActionPerformed
+
+    private void btnVisaCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaCreditoActionPerformed
+        formaPagamento = btnVisaCredito.getText();
+    }//GEN-LAST:event_btnVisaCreditoActionPerformed
+
+    private void btnMasterCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasterCreditoActionPerformed
+        formaPagamento = btnMasterCredito.getText();
+    }//GEN-LAST:event_btnMasterCreditoActionPerformed
+
+    private void btnMasterDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasterDebitoActionPerformed
+        formaPagamento = btnMasterDebito.getText();
+    }//GEN-LAST:event_btnMasterDebitoActionPerformed
 
     
     /**
