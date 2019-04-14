@@ -7,14 +7,10 @@ package Views;
 
 import Controllers.ControladorCompra;
 import Controllers.ControladorPrincipal;
-import Controllers.ControladorProduto;
-import Models.Produto;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +33,11 @@ public class TelaCompra extends javax.swing.JFrame {
         separador = new DecimalFormatSymbols();
         separador.setDecimalSeparator('.');
         df = new DecimalFormat("###,##0.00", separador);
+        ButtonGroup formasPagamento = new ButtonGroup();
+        formasPagamento.add(btnVisaCredito);
+        formasPagamento.add(btnVisaDebito);
+        formasPagamento.add(btnMasterCredito);
+        formasPagamento.add(btnMasterDebito);
     }
 
     /**
@@ -48,13 +49,27 @@ public class TelaCompra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pagamento = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        btnVisaDebito = new javax.swing.JRadioButton();
+        btnVisaCredito = new javax.swing.JRadioButton();
+        btnMasterCredito = new javax.swing.JRadioButton();
+        btnMasterDebito = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        btnConfirmarPagamento = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        cupomFiscal = new javax.swing.JDialog();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtCupom = new javax.swing.JTextArea();
+        btnFinalizar = new javax.swing.JButton();
         btnColocarNoCarrinho = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         carrinho = new javax.swing.JTable();
         txtPrecoTotal = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnEfetuaPagamento = new javax.swing.JButton();
         btnCancelarCompra = new javax.swing.JButton();
         btnRemoverProduto = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -63,6 +78,138 @@ public class TelaCompra extends javax.swing.JFrame {
         txtQtd = new javax.swing.JTextField();
         btnMaisQtd = new javax.swing.JButton();
         btnMenosQtd = new javax.swing.JButton();
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        btnVisaDebito.setText("Visa - Débito");
+
+        btnVisaCredito.setText("Visa - Crédito");
+
+        btnMasterCredito.setText("Mastercard - Crédito");
+
+        btnMasterDebito.setText("Mastercard - Débito");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVisaCredito)
+                    .addComponent(btnVisaDebito))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMasterCredito)
+                    .addComponent(btnMasterDebito))
+                .addGap(16, 16, 16))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVisaDebito)
+                    .addComponent(btnMasterDebito))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVisaCredito)
+                    .addComponent(btnMasterCredito))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Selecione a forma de pagamento:");
+
+        btnConfirmarPagamento.setText("Confirmar");
+        btnConfirmarPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarPagamentoActionPerformed(evt);
+            }
+        });
+
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pagamentoLayout = new javax.swing.GroupLayout(pagamento.getContentPane());
+        pagamento.getContentPane().setLayout(pagamentoLayout);
+        pagamentoLayout.setHorizontalGroup(
+            pagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pagamentoLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(pagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pagamentoLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(btnConfirmarPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pagamentoLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+        pagamentoLayout.setVerticalGroup(
+            pagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pagamentoLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(pagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmarPagamento)
+                    .addComponent(btnVoltar))
+                .addGap(57, 57, 57))
+        );
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Cupom fiscal:");
+
+        txtCupom.setColumns(20);
+        txtCupom.setRows(5);
+        jScrollPane2.setViewportView(txtCupom);
+
+        btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cupomFiscalLayout = new javax.swing.GroupLayout(cupomFiscal.getContentPane());
+        cupomFiscal.getContentPane().setLayout(cupomFiscalLayout);
+        cupomFiscalLayout.setHorizontalGroup(
+            cupomFiscalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cupomFiscalLayout.createSequentialGroup()
+                .addGroup(cupomFiscalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cupomFiscalLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cupomFiscalLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cupomFiscalLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnFinalizar)
+                .addGap(305, 305, 305))
+        );
+        cupomFiscalLayout.setVerticalGroup(
+            cupomFiscalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cupomFiscalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(btnFinalizar)
+                .addGap(44, 44, 44))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,12 +250,12 @@ public class TelaCompra extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 204, 51));
-        jButton4.setText("Finalizar Compra");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEfetuaPagamento.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnEfetuaPagamento.setForeground(new java.awt.Color(0, 204, 51));
+        btnEfetuaPagamento.setText("Efetuar pagamento");
+        btnEfetuaPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEfetuaPagamentoActionPerformed(evt);
             }
         });
 
@@ -135,14 +282,14 @@ public class TelaCompra extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPrecoTotal)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEfetuaPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemoverProduto))
+                    .addComponent(btnRemoverProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
@@ -159,7 +306,7 @@ public class TelaCompra extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEfetuaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)))
         );
@@ -255,8 +402,6 @@ public class TelaCompra extends javax.swing.JFrame {
        else{
            JOptionPane.showMessageDialog(rootPane, "O produto já está no carrinho. Caso queira adicionar mais, remova-o e altere a quantidade!");
        }
-        
-
 
         
     }//GEN-LAST:event_btnColocarNoCarrinhoActionPerformed
@@ -288,7 +433,7 @@ public class TelaCompra extends javax.swing.JFrame {
 
     private void btnCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCompraActionPerformed
         
-        if (verificadorSenha().equals("0147")){
+        if (ControladorPrincipal.getInstance().verificadorSenhaFuncionario().equals("0147")){
             ControladorCompra.getInstance().cancelarCompra();
             ControladorPrincipal.getInstance().setTela(0);
             dispose();            
@@ -304,7 +449,7 @@ public class TelaCompra extends javax.swing.JFrame {
         
         if(carrinho.getSelectedRow() != -1) // executa somente se tiver alguma linha selecionada
         {
-            if (verificadorSenha().equals("0147")) {
+            if (ControladorPrincipal.getInstance().verificadorSenhaFuncionario().equals("0147")) {
                 String produtoRemovido = carrinho.getModel().getValueAt(carrinho.getSelectedRow(), 0).toString();
                 String precoRemovido = carrinho.getModel().getValueAt(carrinho.getSelectedRow(), 3).toString();
 
@@ -325,28 +470,43 @@ public class TelaCompra extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRemoverProdutoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnEfetuaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfetuaPagamentoActionPerformed
+        pagamento.setVisible(true);
+        pagamento.setSize(420, 300);
+        pagamento.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnEfetuaPagamentoActionPerformed
 
-    private String verificadorSenha()
-    {
-            // Cria campo onde o usuario entra com a senha   
-            JPasswordField password = new JPasswordField(10);   
-            password.setEchoChar('*');   
-            // Cria um rótulo para o campo   
-            JLabel rotulo = new JLabel("Digite a senha do funcionário:");   
-            // Coloca o rótulo e a caixa de entrada numa JPanel:   
-            JPanel entUsuario = new JPanel();   
-            entUsuario.add(rotulo);   
-            entUsuario.add(password);   
-            // Mostra o rótulo e a caixa de entrada de password para o usuario fornecer a senha:   
-            JOptionPane.showMessageDialog(null, entUsuario, "Acesso restrito", JOptionPane.PLAIN_MESSAGE);   
-            // O programa só prossegue quando o usuário clicar o botao de OK do showMessageDialog.   
-            // Aí, é só pegar a senha:   
-            // Captura a senha:   
-            return password.getText();         
-    }
+    private void btnConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagamentoActionPerformed
+        
+        JOptionPane.showMessageDialog(this, "Insira o cartão");
+        
+        if(ControladorPrincipal.getInstance().verificadorSenhaCartao().equals("0258"))
+        {
+            ControladorCompra.getInstance().concluirCompra();
+            JOptionPane.showMessageDialog(this, "Pagamento aprovado!");
+            pagamento.dispose();
+            cupomFiscal.setVisible(true);
+            cupomFiscal.setSize(800, 455);
+            cupomFiscal.setLocationRelativeTo(null);
+            txtCupom.setText(ControladorCompra.getInstance().imprimeCupomFiscal() + "\n\n" + "PREÇO TOTAL: " + Double.toString(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
+
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(this, "Senha incorreta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnConfirmarPagamentoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        pagamento.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        ControladorPrincipal.getInstance().setTela(0);
+        cupomFiscal.dispose();
+        dispose();
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -386,17 +546,31 @@ public class TelaCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarCompra;
     private javax.swing.JButton btnColocarNoCarrinho;
+    private javax.swing.JButton btnConfirmarPagamento;
+    private javax.swing.JButton btnEfetuaPagamento;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnMaisQtd;
+    private javax.swing.JRadioButton btnMasterCredito;
+    private javax.swing.JRadioButton btnMasterDebito;
     private javax.swing.JButton btnMenosQtd;
     private javax.swing.JButton btnRemoverProduto;
+    private javax.swing.JRadioButton btnVisaCredito;
+    private javax.swing.JRadioButton btnVisaDebito;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JTable carrinho;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JDialog cupomFiscal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JDialog pagamento;
     private javax.swing.JTextField txtCodProduto;
+    private javax.swing.JTextArea txtCupom;
     private javax.swing.JTextField txtPrecoTotal;
     private javax.swing.JTextField txtQtd;
     // End of variables declaration//GEN-END:variables

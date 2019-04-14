@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ControladorCompra {
     
     private Compra compra;
-    private ArrayList<Compra> listaCompras;
+    private static ArrayList<Compra> listaCompras;
     
     private static ControladorCompra instancia;
     
@@ -24,6 +24,7 @@ public class ControladorCompra {
     {
         if (instancia == null) {
             instancia = new ControladorCompra();
+            listaCompras = new ArrayList<>();
         }
 
         return instancia;
@@ -63,7 +64,7 @@ public class ControladorCompra {
     
     public void concluirCompra()
     {
-        getListaCompras().add(getCompra());
+        listaCompras.add(compra);
     }
     
     public void efetuarPagamento()
@@ -71,16 +72,23 @@ public class ControladorCompra {
         
     }
     
-    /*public void imprimeCupomFiscal()
+    public String imprimeCupomFiscal()
     {
-        for(Produto p : getCompra().getCarrinho())
+        
+        String cupom = "";
+        
+        for(Produto p : compra.getCarrinho().values())
         {
-            System.out.println("Produto: " + p.getNome() + "Preço: " + p.getPreco());
+            cupom += (p.getNome() + "\n" + 
+                    "Preço: " + Double.toString(p.getPreco()) + "\n" + 
+                    "Quantidade: " + "\n\n");
         }
         
-        System.out.println("Preço total: " + getCompra().getPrecoTotal());
         
-    }*/
+        
+        return cupom;
+        
+    }
 
     public Compra getCompra() {
         return compra;

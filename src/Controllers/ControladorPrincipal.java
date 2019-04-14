@@ -7,6 +7,10 @@ package Controllers;
 
 import Views.TelaCompra;
 import Views.TelaInicial;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -42,9 +46,44 @@ public class ControladorPrincipal {
             case 1:
                 new TelaCompra().setVisible(true);
                 break;
-                
+            
         }
     }
     
+    public String verificadorSenhaFuncionario()
+    {
+            // Cria campo onde o usuario entra com a senha   
+            JPasswordField password = new JPasswordField(10);   
+            password.setEchoChar('*');   
+            // Cria um rótulo para o campo   
+            JLabel rotulo = new JLabel("Digite a senha do funcionário:");   
+            // Coloca o rótulo e a caixa de entrada numa JPanel:   
+            JPanel entUsuario = new JPanel();   
+            entUsuario.add(rotulo);   
+            entUsuario.add(password);   
+            // Mostra o rótulo e a caixa de entrada de password para o usuario fornecer a senha:   
+            JOptionPane.showMessageDialog(null, entUsuario, "Acesso restrito", JOptionPane.PLAIN_MESSAGE);   
+            // O programa só prossegue quando o usuário clicar o botao de OK do showMessageDialog.   
+            // Captura a senha:   
+            return password.getText();         
+    }
     
+    public String verificadorSenhaCartao()
+    {
+            // Cria campo onde o usuario entra com a senha   
+            JPasswordField password = new JPasswordField(10);   
+            password.setEchoChar('*');   
+            // Cria um rótulo para o campo   
+            JLabel rotulo = new JLabel("Digite a senha do cartão:");   
+            // Coloca o rótulo e a caixa de entrada numa JPanel:   
+            JPanel entUsuario = new JPanel();   
+            entUsuario.add(rotulo);   
+            entUsuario.add(password);   
+            // Mostra o rótulo e a caixa de entrada de password para o usuario fornecer a senha:   
+            JOptionPane.showMessageDialog(null, entUsuario, "Pagamento", JOptionPane.PLAIN_MESSAGE);   
+            // O programa só prossegue quando o usuário clicar o botao de OK do showMessageDialog.   
+            // Captura a senha:   
+            return password.getText();         
+    }
+
 }
