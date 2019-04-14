@@ -72,18 +72,19 @@ public class ControladorCompra {
         
     }
     
-    public String imprimeCupomFiscal()
+    public String imprimeCupomFiscal(int codigo, int quantidade)
     {
         
-        String cupom = "";
+        String cupom = compra.getCarrinho().get(codigo).getNome() + "\n"+
+                "Preço: " + Double.toString(compra.getCarrinho().get(codigo).getPreco()) + "\n" +
+                "Quantidade: " + Integer.toString(quantidade);
         
-        for(Produto p : compra.getCarrinho().values())
+        /*for(Produto p : compra.getCarrinho().values())
         {
             cupom += (p.getNome() + "\n" + 
                     "Preço: " + Double.toString(p.getPreco()) + "\n" + 
-                    "Quantidade: " + "\n\n");
-        }
-        
+                    "Quantidade: " + Integer.toString(quantidade) + "\n\n");
+        }*/
         
         
         return cupom;

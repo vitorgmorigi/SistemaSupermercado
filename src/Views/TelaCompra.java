@@ -25,6 +25,7 @@ public class TelaCompra extends javax.swing.JFrame {
     private DefaultTableModel tabelaCarrinho;
     private final DecimalFormat df;
     private final DecimalFormatSymbols separador;
+    private ButtonGroup formasPagamento;
     
     public TelaCompra() {
         initComponents();
@@ -34,6 +35,10 @@ public class TelaCompra extends javax.swing.JFrame {
         separador.setDecimalSeparator('.');
         df = new DecimalFormat("###,##0.00", separador);
         ButtonGroup formasPagamento = new ButtonGroup();
+        btnVisaCredito.setActionCommand("Visa - Crédito");
+        btnVisaDebito.setActionCommand("Visa - Débito");
+        btnMasterCredito.setActionCommand("Mastecard - Crédito");
+        btnMasterDebito.setActionCommand("Mastercard - Débito");
         formasPagamento.add(btnVisaCredito);
         formasPagamento.add(btnVisaDebito);
         formasPagamento.add(btnMasterCredito);
@@ -478,23 +483,51 @@ public class TelaCompra extends javax.swing.JFrame {
 
     private void btnConfirmarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagamentoActionPerformed
         
-        JOptionPane.showMessageDialog(this, "Insira o cartão");
         
-        if(ControladorPrincipal.getInstance().verificadorSenhaCartao().equals("0258"))
+      
+        if(btnVisaCredito.isSelected() || btnVisaDebito.isSelected() || btnMasterCredito.isSelected() || btnMasterDebito.isSelected())
         {
-            ControladorCompra.getInstance().concluirCompra();
-            JOptionPane.showMessageDialog(this, "Pagamento aprovado!");
-            pagamento.dispose();
-            cupomFiscal.setVisible(true);
-            cupomFiscal.setSize(800, 455);
-            cupomFiscal.setLocationRelativeTo(null);
-            txtCupom.setText(ControladorCompra.getInstance().imprimeCupomFiscal() + "\n\n" + "PREÇO TOTAL: " + Double.toString(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
+            JOptionPane.showMessageDialog(this, "Insira o cartão");
+            if(ControladorPrincipal.getInstance().verificadorSenhaCartao().equals("0258"))
+            {
+                ControladorCompra.getInstance().concluirCompra();
+                JOptionPane.showMessageDialog(this, "Pagamento aprovado!");
+                pagamento.dispose();
+                cupomFiscal.setVisible(true);
+                cupomFiscal.setSize(800, 455);
+                cupomFiscal.setLocationRelativeTo(null);
 
+                // Impressão do cupom fiscal na tela (for que percorre a JTable)
+                txtCupom.setText("PRODUTOS COMPRADOS: \n\n");
+                for(int i = 0; i < carrinho.getRowCount(); i++){
+                    for(int j = 1; j < carrinho.getColumnCount(); j++){
+                        if(j == 1)
+                            txtCupom.setText(txtCupom.getText() + "Produto: " + carrinho.getValueAt(i, j) + "\n");
+                        else if (j == 2)
+                            txtCupom.setText(txtCupom.getText() + "Quantidade: " + carrinho.getValueAt(i, j) + "\n");
+                        else
+                            txtCupom.setText(txtCupom.getText() + "Preço: " + carrinho.getValueAt(i, j) + "\n");
+
+                    }
+                    txtCupom.setText(txtCupom.getText() + "\n\n");
+
+                }
+
+                txtCupom.setText(txtCupom.getText() + "PREÇO TOTAL: " + ControladorCompra.getInstance().getCompra().getPrecoTotal() + "\n" + "Forma de pagamento: ");
+
+
+            }
+            else{
+            JOptionPane.showMessageDialog(this, "Senha incorreta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+            }
         }
         
         else{
-            JOptionPane.showMessageDialog(this, "Senha incorreta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione uma opção");
         }
+
+        
+
     }//GEN-LAST:event_btnConfirmarPagamentoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
