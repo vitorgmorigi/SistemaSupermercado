@@ -44,7 +44,7 @@ public class TelaCompra extends javax.swing.JFrame {
         formasPagamento.add(btnVisaDebito);
         formasPagamento.add(btnMasterCredito);
         formasPagamento.add(btnMasterDebito);
-        carrinho.setEnabled(false);
+        //carrinho.setEnabled(false);
     }
 
     /**

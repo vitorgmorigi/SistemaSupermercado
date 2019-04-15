@@ -7,6 +7,7 @@ package Views;
 
 import Controllers.ControladorCompra;
 import Controllers.ControladorPrincipal;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -93,8 +94,19 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciaCompraActionPerformed
 
     private void btnGerenciadorComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciadorComprasActionPerformed
-        ControladorPrincipal.getInstance().setTela(2);
-        dispose();
+        
+        if (ControladorPrincipal.getInstance().verificadorSenhaFuncionario().equals("0147")){
+            
+            ControladorPrincipal.getInstance().setTela(2);
+            dispose();            
+            
+        }
+        
+       else{
+            JOptionPane.showMessageDialog(rootPane, "Senha incorreta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+        }
+        
+
     }//GEN-LAST:event_btnGerenciadorComprasActionPerformed
 
     /**
