@@ -414,7 +414,7 @@ public class TelaCompra extends javax.swing.JFrame {
 
     private void btnColocarNoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColocarNoCarrinhoActionPerformed
         
-       try{
+       try{ // exceção para verificar se o usuário digitou um produto cadastrado
         if(ControladorCompra.getInstance().verificaSeOProdutoEstaNoCarrinho(Integer.parseInt(txtCodProduto.getText())) == false){
              ControladorCompra.getInstance().adicionaProdutoNoCarrinho(Integer.parseInt(txtCodProduto.getText()), Integer.parseInt(txtQtd.getText()));
 
@@ -426,7 +426,7 @@ public class TelaCompra extends javax.swing.JFrame {
                                df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()*Integer.parseInt(txtQtd.getText()))};
              this.tabelaCarrinho.addRow(dados);
              txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
-             ControladorCompra.getInstance().getCompra().exibeCarrinho();           
+             //ControladorCompra.getInstance().getCompra().exibeCarrinho();           
         } 
 
         else{

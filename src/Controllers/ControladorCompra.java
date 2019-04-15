@@ -45,7 +45,7 @@ public class ControladorCompra {
     public void removeProdutoDoCarrinho(int codigo, double precoExibidoNaTabela)
     {
         Produto p = ControladorProduto.getInstance().getListaProdutos().get(codigo);
-        System.out.println(compra.getCarrinho().remove(codigo));
+        compra.getCarrinho().remove(codigo);
         compra.setPrecoTotal(getCompra().getPrecoTotal() - precoExibidoNaTabela);
     }
     
