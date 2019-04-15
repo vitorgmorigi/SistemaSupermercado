@@ -414,23 +414,31 @@ public class TelaCompra extends javax.swing.JFrame {
 
     private void btnColocarNoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColocarNoCarrinhoActionPerformed
         
-       if(ControladorCompra.getInstance().verificaSeOProdutoEstaNoCarrinho(Integer.parseInt(txtCodProduto.getText())) == false){
-            ControladorCompra.getInstance().adicionaProdutoNoCarrinho(Integer.parseInt(txtCodProduto.getText()), Integer.parseInt(txtQtd.getText()));
+       try{
+        if(ControladorCompra.getInstance().verificaSeOProdutoEstaNoCarrinho(Integer.parseInt(txtCodProduto.getText())) == false){
+             ControladorCompra.getInstance().adicionaProdutoNoCarrinho(Integer.parseInt(txtCodProduto.getText()), Integer.parseInt(txtQtd.getText()));
 
-            this.tabelaCarrinho = (DefaultTableModel) carrinho.getModel();
-            Object dados[] = {ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getCodigo(),
-                              ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getNome(),
-                              Integer.parseInt(txtQtd.getText()),
-                              df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()),
-                              df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()*Integer.parseInt(txtQtd.getText()))};
-            this.tabelaCarrinho.addRow(dados);
-            txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
-            ControladorCompra.getInstance().getCompra().exibeCarrinho();           
-       } 
-       
-       else{
-           JOptionPane.showMessageDialog(rootPane, "O produto já está no carrinho. Caso queira adicionar mais, remova-o e altere a quantidade!");
+             this.tabelaCarrinho = (DefaultTableModel) carrinho.getModel();
+             Object dados[] = {ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getCodigo(),
+                               ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getNome(),
+                               Integer.parseInt(txtQtd.getText()),
+                               df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()),
+                               df.format(ControladorCompra.getInstance().getCompra().getCarrinho().get(Integer.parseInt(txtCodProduto.getText())).getPreco()*Integer.parseInt(txtQtd.getText()))};
+             this.tabelaCarrinho.addRow(dados);
+             txtPrecoTotal.setText(df.format(ControladorCompra.getInstance().getCompra().getPrecoTotal()));
+             ControladorCompra.getInstance().getCompra().exibeCarrinho();           
+        } 
+
+        else{
+            JOptionPane.showMessageDialog(rootPane, "O produto já está no carrinho. Caso queira adicionar mais, remova-o e altere a quantidade!");
+        }           
        }
+       
+       catch(NullPointerException e)
+       {
+           JOptionPane.showMessageDialog(this, "Código inválido!", "Alerta", JOptionPane.ERROR_MESSAGE);
+       }
+
 
         
     }//GEN-LAST:event_btnColocarNoCarrinhoActionPerformed

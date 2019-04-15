@@ -40,10 +40,12 @@ public class ControladorProduto {
     
     public void criaListaProdutos(){
         listaProdutos = new HashMap<>();
-        listaProdutos.put(0, new Produto(0, "Papel Higienico", 17.5));
-        listaProdutos.put(1, new Produto(1, "Arroz", 5.5));
-        listaProdutos.put(2, new Produto(2, "Macarrão", 2.9));
-        listaProdutos.put(3, new Produto(3, "Feijão", 3.3));
+        listaProdutos.put(0, new Produto(0, "Papel Higienico Personal Vip", 15.90));
+        listaProdutos.put(1, new Produto(1, "Cerveja Antarctica 350ml", 1.89));
+        listaProdutos.put(2, new Produto(2, "Chocolate Milka 90g", 6.99));
+        listaProdutos.put(3, new Produto(3, "Café Melitta Tradicicional", 9.29));
+        listaProdutos.put(4, new Produto(4, "Óleo de Soja Liza 900 ml", 2.79));
+        listaProdutos.put(5, new Produto(4, "Achocolatado Nescau 400g", 4.99));
         
     }
     
