@@ -21,7 +21,6 @@ public class SistemaSupermercado {
     public static void main(String[] args) {
         
         ControladorProduto.getInstance().criaListaProdutos();
-        System.out.println("Tamanho da lista:" + ControladorProduto.getInstance().getListaProdutos().size());
         ControladorPrincipal.getInstance().setTela(0);
         
         
